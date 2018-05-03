@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+
+	<xs:simpleType name="email">
+	  <xs:restriction base="xs:string">
+		<xs:pattern value="[A-Za-z0-9!#-'\*\+\-/=\?\^_`\{-~]+(\.[A-Za-z0-9!#-'\*\+\-/=\?\^_`\{-~]+)*@[A-Za-z0-9!#-'\*\+\-/=\?\^_`\{-~]+(\.[A-Za-z0-9!#-'\*\+\-/=\?\^_`\{-~]+)*"/>
+	  </xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="OLFMessage">
+		<xs:complexType>			
+			<xs:sequence>
+			
+				<xs:element name="Header">
+					<xs:complexType>
+							<xs:all>
+								<xs:element name="Sender" type="xs:string"></xs:element>
+								<xs:element name="SentDateTime" type="xs:string"></xs:element>
+							</xs:all>	
+					</xs:complexType>
+				</xs:element>
+				
+				<xs:element name="Publishers">
+					<xs:complexType>
+						<xs:choice maxOccurs="unbounded">
+							<xs:element name="Publisher">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="PublisherName" type="xs:string"></xs:element>
+										<xs:element name="PublisherEmail" type="email"></xs:element>
+										<xs:element name="Methods">
+											<xs:complexType>
+												<xs:choice maxOccurs="unbounded">
+													<xs:element name="Method">
+														<xs:complexType>
+															<xs:all>
+																<xs:element name="MethodIdentifier" minOccurs="0" type="xs:string"></xs:element>
+																<xs:element name="MethodName" minOccurs="0" type="xs:string"></xs:element>
+																<xs:element name="TargetAudiences" minOccurs="0">
+																	<xs:complexType>
+																		<xs:choice minOccurs="0" maxOccurs="unbounded">
+																			<xs:element name="TargetAudience">
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:enumeration value="KO-J1"/>
+																						<xs:enumeration value="KO-J2"/>
+																						<xs:enumeration value="KO-J3"/>
+																						<xs:enumeration value="LO-J1"/>
+																						<xs:enumeration value="LO-J2"/>
+																						<xs:enumeration value="LO-J3"/>
+																						<xs:enumeration value="LO-J4"/>
+																						<xs:enumeration value="LO-J5"/>
+																						<xs:enumeration value="LO-J6"/>
+																						<xs:enumeration value="SO-J1"/>
+																						<xs:enumeration value="SO-J2"/>
+																						<xs:enumeration value="SO-J3"/>
+																						<xs:enumeration value="SO-J4"/>
+																						<xs:enumeration value="SO-J5"/>
+																						<xs:enumeration value="SO-J6"/>
+																						<xs:enumeration value="SO-G1"/>
+																						<xs:enumeration value="SO-G2"/>
+																						<xs:enumeration value="SO-G3"/>
+																						<xs:enumeration value="SO-ASTR"/>
+																						<xs:enumeration value="SO-BSTR"/>
+																						<xs:enumeration value="SO-ASO"/>
+																						<xs:enumeration value="SO-BSO"/>
+																						<xs:enumeration value="SO-TSO"/>
+																						<xs:enumeration value="SO-KSO"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																		</xs:choice>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="LearningObjectives">
+																	<xs:complexType>
+																		<xs:choice maxOccurs="unbounded">
+																			<xs:element name="LearningObjective">
+																				<xs:complexType>
+																					<xs:all>
+																						<xs:element name="LearningObjectiveIdentifier" minOccurs="0" type="xs:string"></xs:element>
+																						<xs:element name="LearningObjectiveDescription" minOccurs="0" type="xs:string"></xs:element>
+																						<xs:element name="LearningObjectiveCategories" minOccurs="0">
+																							<xs:complexType>
+																								<xs:choice minOccurs="0" maxOccurs="unbounded">
+																									<xs:element name="LearningObjectiveCategory">
+																										<xs:complexType>
+																											<xs:simpleContent>
+																												<xs:extension base="xs:string">
+																													<xs:attribute name="type" use="required">
+																														<xs:simpleType>
+																															<xs:restriction base="xs:string">
+																																<xs:pattern value="0[1-8]"></xs:pattern>
+																															</xs:restriction>
+																														</xs:simpleType>
+																													</xs:attribute>
+																												</xs:extension>
+																											</xs:simpleContent>
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:choice>
+																							</xs:complexType>
+																						</xs:element>
+																						<xs:element name="LearningObjectiveCodes" minOccurs="0">
+																							<xs:complexType>
+																								<xs:choice minOccurs="0" maxOccurs="unbounded">
+																									<xs:element name="LearningObjectiveCode">
+																										<xs:complexType>
+																											<xs:simpleContent>
+																												<xs:extension base="xs:string">
+																													<xs:attribute name="type" use="required">
+																														<xs:simpleType>
+																															<xs:restriction base="xs:string">
+																																<xs:pattern value="0[1-6]"></xs:pattern>
+																															</xs:restriction>
+																														</xs:simpleType>
+																													</xs:attribute>
+																												</xs:extension>
+																											</xs:simpleContent>
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:choice>
+																							</xs:complexType>
+																						</xs:element>
+																						<xs:element name="Qualifications" minOccurs="0">
+																							<xs:complexType>
+																								<xs:choice minOccurs="0" maxOccurs="unbounded">
+																									<xs:element name="Qualification" type="xs:string"></xs:element>
+																								</xs:choice>
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:all>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:choice>
+																	</xs:complexType>
+																</xs:element>
+															</xs:all>
+														</xs:complexType>
+													</xs:element>
+												</xs:choice>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+					
+			<xs:attribute name="release" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
